@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vireiii</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('vivir.jpeg'); /* Background statis */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            min-height: 100vh;
+        }
+        .message {
+            font-size: 24px;
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            color: #333;
+        }
+        .heart {
+            color: red;
+            font-size: 30px;
+        }
+        .video-container {
+            margin: 20px;
+            max-width: 560px; /* Sesuaikan jika video vertikal */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily "Hi" 4 MyBubub <span class="heart">❤️</span></h1>
+    <div class="message" id="dailyMessage">10 Hari lagi Menuju Pertemuan Kita</div>
+    <div class="video-container">
+        <video controls autoplay muted loop>
+            <source src="vid1.mp4" type="video/mp4"> <!-- Nama file video kamu -->
+            Browser kamu tidak support video tag.
+        </video>
+    </div>
+    <button onclick="changeMessage()">Sentuh aku</button>
+
+    <script>
+        // Array pesan untuk tombol acak
+        const messages = [
+            "10 Hari lagi Menuju Pertemuan Kita",
+            "Meskipun masih hari selasa, credit video untuk ultah nifa(dan kangen matdis)",
+            "semual mualnya kamu sama matdis, jangan mual sama aku yaa",
+            "wof u everyday ❤️"
+        ];
+
+        // Fungsi tombol
+        function changeMessage() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById('dailyMessage').innerText = messages[randomIndex];
+        }
+    </script>
+</body>
+</html>
