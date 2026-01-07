@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vireiii</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('vivir.jpeg'); /* Background awal */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat; /* Tidak repeat, hindari hitam */
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            min-height: 100vh;
+            /* Animasi awal: geser horizontal */
+            animation: moveHorizontal 10s linear infinite;
+        }
+        /* Animasi horizontal (kanan-kiri) */
+        @keyframes moveHorizontal {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Animasi vertikal (atas-bawah) */
+        @keyframes moveVertical {
+            0% { background-position: 50% 0%; }
+            50% { background-position: 50% 100%; }
+            100% { background-position: 50% 0%; }
+        }
+        /* Animasi diagonal (kiri-atas ke kanan-bawah) */
+        @keyframes moveDiagonal {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .message {
+            font-size: 24px;
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            color: #333;
+        }
+        .heart {
+            color: red;
+            font-size: 30px;
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily "Hi" 4 MyBubub <span class="heart">❤️</span></h1>
+    <div class="message" id="dailyMessage">4 Hari lagi Menuju Pertemuan Kita</div>
+    <button onclick="changeBackground()">Sentuh aku</button> <!-- Tombol ubah background, arah gerak, dan pesan acak -->
+
+    <script>
+        // Array pesan untuk acak
+        const messages = [
+            "4 Hari lagi Menuju Pertemuan Kita",
+            "Semlamat berlibur yaaa, have fun sayangg",
+            "im always miss you",
+            "Fokus Healing yaa sayangggg",
+            "wof u everyday ❤️"
+        ];
+
+        // Array background gambar
+        const backgrounds = [
+            "url('vivir.jpeg')",
+            "url('bg2.jpeg')"  // Tambah lebih jika mau
+        ];
+
+        // Array animasi arah (untuk arah bebas acak)
+        const animations = ['moveHorizontal', 'moveVertical', 'moveDiagonal'];
+
+        // Fungsi tombol: ubah background, arah gerak, dan pesan acak
+        function changeBackground() {
+            // Pilih background acak
+            const randomBgIndex = Math.floor(Math.random() * backgrounds.length);
+            document.body.style.backgroundImage = backgrounds[randomBgIndex];
+
+            // Pilih animasi arah acak
+            const randomAnimIndex = Math.floor(Math.random() * animations.length);
+            const selectedAnimation = animations[randomAnimIndex];
+
+            // Reset animasi lama dan apply yang baru
+            document.body.style.animation = 'none'; // Stop animasi lama
+            setTimeout(() => {
+                document.body.style.animation = `${selectedAnimation} 10s linear infinite`; // Start animasi baru
+            }, 10); // Delay kecil untuk reset
+
+            // Ubah pesan acak
+            const randomMessageIndex = Math.floor(Math.random() * messages.length);
+            document.getElementById('dailyMessage').innerText = messages[randomMessageIndex];
+        }
+    </script>
+</body>
+</html>
