@@ -1,46 +1,290 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vireiii</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('bg2.jpeg'); /* Background bg2.jpeg */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat; /* Hindari hitam */
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-            min-height: 100vh;
-            animation: moveBackground 10s linear infinite; /* Bergerak looping horizontal */
-        }
-        /* Animasi bergerak kanan-kiri looping */
-        @keyframes moveBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .message {
-            font-size: 24px;
-            margin: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            color: #333;
-        }
-        .heart {
-            color: red;
-            font-size: 30px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vira 🎉</title>
+<style>
+  :root{
+    --bg1:#1a0b2e;
+    --bg2:#3b1361;
+    --pink:#ff6fb5;
+    --gold:#ffd66b;
+    --white:#fdf6ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:radial-gradient(ellipse at top, var(--bg2), var(--bg1));
+    color:var(--white);
+    overflow:hidden;
+    position:relative;
+    padding:20px;
+  }
+  .stars{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    pointer-events:none;
+    z-index:0;
+  }
+  .star{
+    position:absolute;
+    width:2px;height:2px;
+    background:white;
+    border-radius:50%;
+    opacity:0.7;
+    animation:twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.2;}
+    50%{opacity:1;}
+  }
+  .container{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    max-width:600px;
+    width:100%;
+  }
+  .subtitle{
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    color:var(--pink);
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:2.2rem;
+    margin-bottom:8px;
+    color:var(--gold);
+    text-shadow:0 0 20px rgba(255,214,107,0.5);
+  }
+  .desc{
+    color:#d8c8ef;
+    margin-bottom:35px;
+    font-size:0.95rem;
+  }
+  #countdown{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+  }
+  .time-box{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,111,181,0.35);
+    border-radius:16px;
+    padding:18px 14px;
+    min-width:80px;
+    backdrop-filter:blur(6px);
+  }
+  .time-box .num{
+    font-size:2.1rem;
+    font-weight:700;
+    color:var(--white);
+  }
+  .time-box .label{
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--pink);
+    margin-top:4px;
+  }
+  #wib-time{
+    font-size:0.85rem;
+    color:#b9a3d8;
+  }
+
+  /* Birthday reveal */
+  #birthday-screen{
+    display:none;
+    animation:fadeIn 1.2s ease forwards;
+  }
+  @keyframes fadeIn{
+    from{opacity:0;transform:scale(0.9);}
+    to{opacity:1;transform:scale(1);}
+  }
+  #birthday-screen h1{
+    font-size:2.6rem;
+    margin-bottom:10px;
+  }
+  #birthday-screen .name{
+    font-size:2rem;
+    color:var(--pink);
+    text-shadow:0 0 25px rgba(255,111,181,0.6);
+    margin-bottom:6px;
+  }
+  #birthday-screen .age{
+    font-size:1.2rem;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
+  #birthday-screen .love{
+    font-size:1.05rem;
+    color:var(--white);
+    line-height:1.6;
+  }
+  .heart{
+    font-size:1.4rem;
+    display:inline-block;
+    animation:beat 1.2s infinite;
+  }
+  @keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.25);}
+  }
+  .confetti{
+    position:fixed;
+    top:-10px;
+    z-index:2;
+    border-radius:2px;
+    animation:fall linear forwards;
+  }
+  @keyframes fall{
+    to{ transform:translateY(110vh) rotate(360deg); opacity:0.9; }
+  }
+</style>
 </head>
 <body>
-    <h1>Daily "Hi" 4 MyBubub <span class="heart">❤️</span></h1>
-    <div class="message">tidak ada apa apa, hanya kangen</div> <!-- Pesan statis -->
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+  <!-- Countdown screen -->
+  <div id="countdown-screen">
+    <div class="subtitle">Menghitung mundur menuju</div>
+    <h1>Hari Spesial Vira 🎂</h1>
+    <p class="desc">Detiik demi detik, menuju 21 tahun Viraa...</p>
+
+    <div id="countdown">
+      <div class="time-box"><div class="num" id="days">00</div><div class="label">Hari</div></div>
+      <div class="time-box"><div class="num" id="hours">00</div><div class="label">Jam</div></div>
+      <div class="time-box"><div class="num" id="minutes">00</div><div class="label">Menit</div></div>
+      <div class="time-box"><div class="num" id="seconds">00</div><div class="label">Detik</div></div>
+    </div>
+
+    <div id="wib-time"></div>
+  </div>
+
+  <!-- Birthday screen (hidden until countdown ends) -->
+  <div id="birthday-screen">
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <div class="name">Vira Haniifah Septiani</div>
+    <div class="age">21st Birthday ✨</div>
+    <p class="love">
+      Semoga di usia yang baru ini, semua harapan dan mimpimu perlahan menjadi nyata.<br>
+      Terima kasih sudah jadi dirimu yang luar biasa.<br><br>
+      Im always loving you <span class="heart">❤️</span>
+    </p>
+  </div>
+
+</div>
+
+<script>
+// Buat bintang random di background
+const starsContainer = document.getElementById('stars');
+for(let i=0;i<80;i++){
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random()*100 + '%';
+  s.style.top = Math.random()*100 + '%';
+  s.style.animationDelay = (Math.random()*3) + 's';
+  starsContainer.appendChild(s);
+}
+
+// Fungsi untuk mendapatkan waktu sekarang di WIB (UTC+7)
+function getWIBDate(){
+  const now = new Date();
+  // offset UTC+7 dalam menit
+  const utc = now.getTime() + (now.getTimezoneOffset()*60000);
+  return new Date(utc + (7*3600000));
+}
+
+// Hitung target: 00:00 WIB berikutnya
+function getNextMidnightWIB(){
+  const nowWIB = getWIBDate();
+  const target = new Date(nowWIB);
+  target.setHours(24,0,0,0); // ini otomatis jadi 00:00 hari berikutnya
+  return target;
+}
+
+let targetWIB = getNextMidnightWIB();
+
+function updateCountdown(){
+  const nowWIB = getWIBDate();
+  const diff = targetWIB - nowWIB;
+
+  const wibTimeStr = nowWIB.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  document.getElementById('wib-time').textContent = 'Waktu sekarang (WIB): ' + wibTimeStr;
+
+  if(diff <= 0){
+    showBirthday();
+    return;
+  }
+
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff/(1000*60*60)) % 24);
+  const minutes = Math.floor((diff/(1000*60)) % 60);
+  const seconds = Math.floor((diff/1000) % 60);
+
+  document.getElementById('days').textContent = String(days).padStart(2,'0');
+  document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+}
+
+function showBirthday(){
+  clearInterval(timer);
+  document.getElementById('countdown-screen').style.display = 'none';
+  const bday = document.getElementById('birthday-screen');
+  bday.style.display = 'block';
+  launchConfetti();
+}
+
+function launchConfetti(){
+  const colors = ['#ff6fb5','#ffd66b','#b385ff','#6fe3ff','#fdf6ff'];
+  for(let i=0;i<120;i++){
+    setTimeout(()=>{
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      const size = Math.random()*8+6;
+      c.style.width = size+'px';
+      c.style.height = size*0.4+'px';
+      c.style.left = Math.random()*100+'vw';
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration = (Math.random()*2+3)+'s';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 5500);
+    }, i*40);
+  }
+  // ulangi confetti setiap beberapa detik
+  setInterval(()=>{
+    for(let i=0;i<40;i++){
+      setTimeout(()=>{
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        const size = Math.random()*8+6;
+        c.style.width = size+'px';
+        c.style.height = size*0.4+'px';
+        c.style.left = Math.random()*100+'vw';
+        c.style.background = colors[Math.floor(Math.random()*colors.length)];
+        c.style.animationDuration = (Math.random()*2+3)+'s';
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(), 5500);
+      }, i*40);
+    }
+  }, 6000);
+}
+
+updateCountdown();
+const timer = setInterval(updateCountdown, 1000);
+</script>
+
 </body>
 </html>
