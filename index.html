@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Happy Birthday Vira 🎉</title>
 <style>
   :root{
@@ -49,82 +49,30 @@
     text-align:center;
     max-width:600px;
     width:100%;
-  }
-  .subtitle{
-    letter-spacing:4px;
-    text-transform:uppercase;
-    font-size:0.85rem;
-    color:var(--pink);
-    margin-bottom:10px;
-  }
-  h1{
-    font-size:2.2rem;
-    margin-bottom:8px;
-    color:var(--gold);
-    text-shadow:0 0 20px rgba(255,214,107,0.5);
-  }
-  .desc{
-    color:#d8c8ef;
-    margin-bottom:35px;
-    font-size:0.95rem;
-  }
-  #countdown{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    flex-wrap:wrap;
-    margin-bottom:30px;
-  }
-  .time-box{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,111,181,0.35);
-    border-radius:16px;
-    padding:18px 14px;
-    min-width:80px;
-    backdrop-filter:blur(6px);
-  }
-  .time-box .num{
-    font-size:2.1rem;
-    font-weight:700;
-    color:var(--white);
-  }
-  .time-box .label{
-    font-size:0.7rem;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    color:var(--pink);
-    margin-top:4px;
-  }
-  #wib-time{
-    font-size:0.85rem;
-    color:#b9a3d8;
-  }
-
-  /* Birthday reveal */
-  #birthday-screen{
-    display:none;
     animation:fadeIn 1.2s ease forwards;
   }
   @keyframes fadeIn{
     from{opacity:0;transform:scale(0.9);}
     to{opacity:1;transform:scale(1);}
   }
-  #birthday-screen h1{
+  h1{
     font-size:2.6rem;
     margin-bottom:10px;
+    color:var(--gold);
+    text-shadow:0 0 20px rgba(255,214,107,0.5);
   }
-  #birthday-screen .name{
+  .name{
     font-size:2rem;
     color:var(--pink);
     text-shadow:0 0 25px rgba(255,111,181,0.6);
     margin-bottom:6px;
   }
-  #birthday-screen .age{
+  .age{
     font-size:1.2rem;
     color:var(--gold);
     margin-bottom:20px;
   }
-  #birthday-screen .love{
+  .love{
     font-size:1.05rem;
     color:var(--white);
     line-height:1.6;
@@ -155,35 +103,14 @@
 <div class="stars" id="stars"></div>
 
 <div class="container">
-
-  <!-- Countdown screen -->
-  <div id="countdown-screen">
-    <div class="subtitle">Menghitung mundur menuju</div>
-    <h1>Hari Spesial Vira 🎂</h1>
-    <p class="desc">Detiik demi detik, menuju 21 tahun Viraa...</p>
-
-    <div id="countdown">
-      <div class="time-box"><div class="num" id="days">00</div><div class="label">Hari</div></div>
-      <div class="time-box"><div class="num" id="hours">00</div><div class="label">Jam</div></div>
-      <div class="time-box"><div class="num" id="minutes">00</div><div class="label">Menit</div></div>
-      <div class="time-box"><div class="num" id="seconds">00</div><div class="label">Detik</div></div>
-    </div>
-
-    <div id="wib-time"></div>
-  </div>
-
-  <!-- Birthday screen (hidden until countdown ends) -->
-  <div id="birthday-screen">
-    <h1>🎉 Happy Birthday 🎉</h1>
-    <div class="name">Vira Haniifah Septiani</div>
-    <div class="age">21st Birthday ✨</div>
-    <p class="love">
-      Semoga di usia yang baru ini, semua harapan dan mimpimu perlahan menjadi nyata.<br>
-      Terima kasih sudah jadi dirimu yang luar biasa.<br><br>
-      Im always loving you <span class="heart">❤️</span>
-    </p>
-  </div>
-
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <div class="name">Vira Haniifah Septiani</div>
+  <div class="age">21st Birthday ✨</div>
+  <p class="love">
+    Semoga di usia yang baru ini, semua harapan dan mimpimu perlahan menjadi nyata.<br>
+    Terima kasih sudah jadi dirimu yang luar biasa.<br><br>
+    Im always loving you <span class="heart">❤️</span>
+  </p>
 </div>
 
 <script>
@@ -196,55 +123,6 @@ for(let i=0;i<80;i++){
   s.style.top = Math.random()*100 + '%';
   s.style.animationDelay = (Math.random()*3) + 's';
   starsContainer.appendChild(s);
-}
-
-// Fungsi untuk mendapatkan waktu sekarang di WIB (UTC+7)
-function getWIBDate(){
-  const now = new Date();
-  // offset UTC+7 dalam menit
-  const utc = now.getTime() + (now.getTimezoneOffset()*60000);
-  return new Date(utc + (7*3600000));
-}
-
-// Hitung target: 00:00 WIB berikutnya
-function getNextMidnightWIB(){
-  const nowWIB = getWIBDate();
-  const target = new Date(nowWIB);
-  target.setHours(24,0,0,0); // ini otomatis jadi 00:00 hari berikutnya
-  return target;
-}
-
-let targetWIB = getNextMidnightWIB();
-
-function updateCountdown(){
-  const nowWIB = getWIBDate();
-  const diff = targetWIB - nowWIB;
-
-  const wibTimeStr = nowWIB.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-  document.getElementById('wib-time').textContent = 'Waktu sekarang (WIB): ' + wibTimeStr;
-
-  if(diff <= 0){
-    showBirthday();
-    return;
-  }
-
-  const days = Math.floor(diff/(1000*60*60*24));
-  const hours = Math.floor((diff/(1000*60*60)) % 24);
-  const minutes = Math.floor((diff/(1000*60)) % 60);
-  const seconds = Math.floor((diff/1000) % 60);
-
-  document.getElementById('days').textContent = String(days).padStart(2,'0');
-  document.getElementById('hours').textContent = String(hours).padStart(2,'0');
-  document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
-  document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
-}
-
-function showBirthday(){
-  clearInterval(timer);
-  document.getElementById('countdown-screen').style.display = 'none';
-  const bday = document.getElementById('birthday-screen');
-  bday.style.display = 'block';
-  launchConfetti();
 }
 
 function launchConfetti(){
@@ -263,7 +141,6 @@ function launchConfetti(){
       setTimeout(()=>c.remove(), 5500);
     }, i*40);
   }
-  // ulangi confetti setiap beberapa detik
   setInterval(()=>{
     for(let i=0;i<40;i++){
       setTimeout(()=>{
@@ -282,8 +159,7 @@ function launchConfetti(){
   }, 6000);
 }
 
-updateCountdown();
-const timer = setInterval(updateCountdown, 1000);
+launchConfetti();
 </script>
 
 </body>
